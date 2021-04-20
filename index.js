@@ -195,7 +195,9 @@ class Car {
  */
 function isEvenNumberAsync(number) {
   let result;
-  if (number % 2 === 0) {
+  if (typeof number === "string" || !number) {
+    result = "number must be a number";
+  } else if (number % 2 === 0) {
     result = true;
   } else {
     result = false;

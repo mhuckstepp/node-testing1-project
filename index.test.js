@@ -159,10 +159,12 @@ describe("[Exercise 7] isEvenNumberAsync", () => {
     let check = await utils.isEvenNumberAsync(7);
     expect(check).toEqual(false);
   });
-  test.todo(
-    '[21] rejects an error with the message "number must be a number" if passed a non-number type'
-  );
-  test.todo(
-    '[22] rejects an error with the message "number must be a number" if passed NaN'
-  );
+  test('[21] rejects an error with the message "number must be a number" if passed a non-number type', async () => {
+    let check = await utils.isEvenNumberAsync("Hello");
+    expect(check).toMatch(/must be a number/);
+  });
+  test('[22] rejects an error with the message "number must be a number" if passed NaN', async () => {
+    let check = await utils.isEvenNumberAsync(NaN);
+    expect(check).toMatch(/must be a number/);
+  });
 });
