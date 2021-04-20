@@ -1,3 +1,4 @@
+const { run } = require("jest");
 const utils = require("./index");
 
 it("sanity check", () => {
@@ -57,69 +58,53 @@ describe("[Exercise 4] Counter", () => {
     counter = new utils.Counter(3); // each test must start with a fresh counter
   });
   test("[6] the FIRST CALL of counter.countDown returns the initial count", () => {
-    let runOne = counter.countDown();
-    expect(runOne).toEqual(3);
+    expect(counter.countDown()).toEqual(3);
   });
   test("[7] the SECOND CALL of counter.countDown returns the initial count minus one", () => {
-    let runOne = counter.countDown(); //eslint-disable-line
-    let runTwo = counter.countDown();
-    expect(runTwo).toEqual(2);
+    counter.countDown();
+    expect(counter.countDown()).toEqual(2);
   });
   test("[8] the count eventually reaches zero but does not go below zero", () => {
-    let runOne = counter.countDown(); //eslint-disable-line
-    let runTwo = counter.countDown(); //eslint-disable-line
-    let runThree = counter.countDown();
-    let runFour = counter.countDown();
-    let runFive = counter.countDown();
-    expect(runThree).toEqual(1);
-    expect(runFour).toEqual(0);
-    expect(runFive).toEqual(0);
+    counter.countDown();
+    counter.countDown();
+    expect(counter.countDown()).toEqual(1);
+    expect(counter.countDown()).toEqual(0);
+    expect(counter.countDown()).toEqual(0);
   });
 });
 describe("[Exercise 5] Seasons", () => {
   let seasons;
+  function runSeasons(runs) {
+    let counter = 0;
+    while (counter < runs - 1) {
+      seasons.next();
+      counter++;
+    }
+  }
   beforeEach(() => {
     seasons = new utils.Seasons(); // each test must start with fresh seasons
   });
   test('[9] the FIRST call of seasons.next returns "summer"', () => {
-    let firstCall = seasons.next();
-    expect(firstCall).toEqual("summer");
+    expect(seasons.next()).toEqual("summer");
   });
   test('[10] the SECOND call of seasons.next returns "fall"', () => {
-    seasons.next(); //eslint-disable-line
-    let secondCall = seasons.next();
-    expect(secondCall).toEqual("fall");
+    runSeasons(2);
+    expect(seasons.next()).toEqual("fall");
   });
   test('[11] the THIRD call of seasons.next returns "winter"', () => {
-    seasons.next();
-    seasons.next();
-    let thirdCall = seasons.next();
-    expect(thirdCall).toEqual("winter");
+    runSeasons(3);
+    expect(seasons.next()).toEqual("winter");
   });
   test('[12] the FOURTH call of seasons.next returns "spring"', () => {
-    seasons.next();
-    seasons.next();
-    seasons.next();
-    let fourthCall = seasons.next();
-    expect(fourthCall).toEqual("spring");
+    runSeasons(4);
+    expect(seasons.next()).toEqual("spring");
   });
   test('[13] the FIFTH call of seasons.next returns again "summer"', () => {
-    seasons.next();
-    seasons.next();
-    seasons.next();
-    seasons.next();
-    let fifthCall = seasons.next();
-    expect(fifthCall).toEqual("summer");
+    runSeasons(5);
+    expect(seasons.next()).toEqual("summer");
   });
   test('[14] the 40th call of seasons.next returns "spring"', async () => {
-    function runSeasons() {
-      let counter = 0;
-      while (counter < 39) {
-        seasons.next();
-        counter++;
-      }
-    }
-    runSeasons();
+    runSeasons(40);
     expect(seasons.next()).toEqual("spring");
   });
 });

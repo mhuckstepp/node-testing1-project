@@ -1,7 +1,5 @@
 # Unit Testing
 
-<!-- change for initial commit -->
-
 ## Introduction
 
 ## Instructions
