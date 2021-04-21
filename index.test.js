@@ -1,4 +1,3 @@
-const { run } = require("jest");
 const utils = require("./index");
 
 it("sanity check", () => {
@@ -7,7 +6,6 @@ it("sanity check", () => {
 
 describe("[Exercise 1] trimProperties", () => {
   test("[1] returns an object with the properties trimmed", () => {
-    // EXAMPLE
     const input = { foo: "  foo ", bar: "bar ", baz: " baz" };
     const expected = { foo: "foo", bar: "bar", baz: "baz" };
     const actual = utils.trimProperties(input);
@@ -75,8 +73,8 @@ describe("[Exercise 4] Counter", () => {
 describe("[Exercise 5] Seasons", () => {
   let seasons;
   function runSeasons(runs) {
-    let counter = 0;
-    while (counter < runs - 1) {
+    let counter = 1;
+    while (counter < runs) {
       seasons.next();
       counter++;
     }
